@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="antialiased">
+<body class="antialiased bg-slate-100 dark:bg-slate-900">
 
     <x-layouts.navigation />
 

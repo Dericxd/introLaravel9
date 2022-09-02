@@ -2,20 +2,30 @@
     :title="$post->title"
     :meta-description="$post->body">
 
-    <h1>
+    <h1 class="my-4 font-serif text-3xl text-center text-sky-600 dark:text-sky-500">
         Edit form
     </h1>
 
-    <form action="{{ route('posts.update',$post) }}" method="post">
+    <form action="{{ route('posts.update',$post) }}"
+          class="max-w-xl px-8 py-4 mx-auto bg-white rounded shadow dark:bg-slate-800"
+          method="post">
         @csrf
         @method('patch')
 
         @include('posts.form-fiels')
 
-        <button type="submit">Enviar</button>
+        <div class="flex items-center justify-between mt-4">
+            <a class="text-sm font-semibold underline border-transparent border-2 rounded dark:text-slate-300 text-slate-600 focus:border-sky-500 focus:outline-none" href="{{ route('posts.index') }}">
+                Regresar
+            </a>
+            <button
+                class="py-1 px-3 mr-2 mb-2 text-sm font-medium
+                text-sky-900 focus:outline-none bg-white rounded-lg
+                border border-sky-200 hover:bg-sky-100 hover:text-sky-700 focus:z-10
+                focus:ring-4 focus:shadow-sky dark:focus:ring-sky-700
+                dark:bg-sky-800 dark:text-white dark:border-sky-600 dark:hover:text-white dark:hover:bg-sky-700"
+                type="submit">Enviar</button>
+        </div>
     </form>
 
-    <a href="{{ route('posts.index') }}">
-        Regresar
-    </a>
 </x-layouts.app>
