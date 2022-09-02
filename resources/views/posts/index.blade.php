@@ -8,12 +8,26 @@
             Crear nuevo post
         </a>
     </h3>
-    @foreach ( $posts as $post)
-        <h2>
-            <a href="{{ route('posts.show',$post) }}">
-                {{ $post->title }}
-            </a>
-        </h2>
-        @endforeach
 
-        </x-layout>
+
+    @foreach ( $posts as $post)
+        <div style="direction: flex; align-items: baseline">
+            <h2>
+                <a href="{{ route('posts.show',$post) }}">
+                    {{ $post->title }}
+                </a>
+                <small >
+                    <strong>
+                        <a href="{{ route('posts.edit',$post) }}" style="color: cyan"> Editar </a>
+                    </strong>
+                </small>
+                <form action="{{ route('posts.destroy', $post) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit"> Delete</button>
+                </form>
+            </h2>
+        </div>
+    @endforeach
+
+</x-layout>
