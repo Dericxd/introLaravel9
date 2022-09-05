@@ -7,14 +7,16 @@
         <h1 class="my-4 font-serif text-3xl text-center text-sky-600 dark:text-sky-500">
             Blog
         </h1>
-        <a class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium
-            text-sky-900 focus:outline-none bg-white rounded-lg
-            border border-sky-200 hover:bg-sky-100 hover:text-sky-700 focus:z-10
-            focus:ring-4 focus:shadow-sky dark:focus:ring-sky-700
-            dark:bg-sky-800 dark:text-white dark:border-sky-600 dark:hover:text-white dark:hover:bg-sky-700"
-           href="{{ route('posts.create') }}">
-            Crear nuevo post
-        </a>
+        @auth
+            <a class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium
+                text-sky-900 focus:outline-none bg-white rounded-lg
+                border border-sky-200 hover:bg-sky-100 hover:text-sky-700 focus:z-10
+                focus:ring-4 focus:shadow-sky dark:focus:ring-sky-700
+                dark:bg-sky-800 dark:text-white dark:border-sky-600 dark:hover:text-white dark:hover:bg-sky-700"
+               href="{{ route('posts.create') }}">
+                Crear nuevo post
+            </a>
+        @endauth
 
     </header>
 
@@ -28,17 +30,19 @@
                     </a>
 
                 </h2>
-                <div class="flex justify-between">
-                    <a href="{{ route('posts.edit',$post) }}" class="inline-flex items-center text-xs hover:text-slate-600 text-slate-500 focus:outline-none focus:border-slate-200" >
-                        Editar
-                    </a>
-                    <form action="{{ route('posts.destroy', $post) }}"
-                          method="post">
-                        @csrf
-                        @method('delete')
-                        <button class="inline-flex items-center text-xs text-red-600  hover:text-red-600 dark:text-red-500/80 focus:outline-none" type="submit"> Delete</button>
-                    </form>
-                </div>
+                @auth
+                    <div class="flex justify-between">
+                        <a href="{{ route('posts.edit',$post) }}" class="inline-flex items-center text-xs hover:text-slate-600 text-slate-500 focus:outline-none focus:border-slate-200" >
+                            Editar
+                        </a>
+                        <form action="{{ route('posts.destroy', $post) }}"
+                              method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="inline-flex items-center text-xs text-red-600  hover:text-red-600 dark:text-red-500/80 focus:outline-none" type="submit"> Delete</button>
+                        </form>
+                    </div>
+                @endauth
             </div>
         @endforeach
     </main>
