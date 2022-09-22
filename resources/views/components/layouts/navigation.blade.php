@@ -1,4 +1,4 @@
-<nav class="w-screen bg-white border-b dark:bg-slate-800 border-slate-900/10 lg:px-8 dark:border-slate-300/10 lg:mx-0">
+<nav class="w-screen overflow-scroll bg-white border-b dark:bg-slate-900 border-slate-900/10 lg:px-8 dark:border-slate-300/10 lg:mx-0">
     <div class="px-4 mx-auto max-w-7xl sm:px-16 lg:px-20">
         <div class="relative flex items-center justify-between h-16">
             <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
@@ -43,11 +43,28 @@
 
                 <div class="ml-auto">
                     <div class="flex space-x-4">
-                        <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
-                        <a href="{{ route('register') }} "
-                           class="px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('register') ? 'hover:text-sky-600 dark:text-white' : 'text-slate-400'}} ">
-                            Register
-                        </a>
+                        @guest
+                            <!-- Active: 'text-sky-600 dark:text-white', Inactive 'text-slate-400' -->
+                            <a href="{{ route('register') }} "
+                                class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('register') ? 'hover:text-sky-600 dark:text-white' : 'text-slate-400'}} ">
+                                Register
+                            </a>
+                            <a href="{{ route('login') }} "
+                                class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white {{ request()->routeIs('register') ? 'hover:text-sky-600 dark:text-white' : 'text-slate-400'}} ">
+                                Login
+                            </a>
+                        @endguest
+                        @auth
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <a href="#"
+                                    class="lg:px-3 py-2 text-sm font-medium rounded-md hover:text-sky-600 dark:hover:text-white text-slate-400"
+                                    onclick="this.closest('form').submit()"
+                                >
+                                    Logout
+                                </a>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             </div>
